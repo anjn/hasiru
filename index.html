@@ -1,0 +1,48 @@
+<html>
+<head>
+<script src="/static/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+  <input id="query" type="text"> <span id="total"></span>
+  <div id="items">
+</div>
+<script>
+$(document).ready(function(){
+  function search() {
+    var query = { query: $("#query").val() };
+		console.log(query);
+    $.ajax({
+      type: "post",
+      url: "/api/search",
+      data: JSON.stringify(query),
+      contentType: 'application/json',
+      dataType: "json",
+      success: function(json_data) {
+        console.log(json_data);
+        function htmlEncode(s)
+        {
+          return s.replace(/&(?!\w+([;\s]|$))/g, "&amp;")
+            .replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        }
+        var s = "";
+        for (var i in json_data.results) {
+          s += htmlEncode(json_data.results[i]) + "<br/>";
+        }
+        $("#total").html(json_data.total);
+        $("#items").html(s);
+      },
+      error: function() {
+        alert("Server Error. Pleasy try again later.");
+      },
+      complete: function() {
+      }
+    });
+  }
+	$("#query").keyup(function(event){
+    search();
+	});
+  search();
+});
+</script>
+</body>
+</html>
