@@ -75,7 +75,7 @@ public:
       std::vector<std::pair<uint32_t, uint32_t>>& id_pos) const
   {
     size_t buf_size;
-    char* buf = reinterpret_cast<char*>(db_index.get(key.c_str(), key.size(), &buf_size));
+    char const* buf = reinterpret_cast<char const*>(db_index.get(key.c_str(), key.size(), &buf_size));
     if (buf != nullptr) decode_ids(buf, buf_size, id_pos);
   }
 
