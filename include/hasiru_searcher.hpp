@@ -1,6 +1,7 @@
 #pragma once
 #include <sys/mman.h>
 #include <fcntl.h>
+#include <unistd.h>
 #include <iostream>
 #include <fstream>
 #include <codecvt>
@@ -29,7 +30,7 @@ public:
   bool db_open()
   {
     // index
-    ifs_index.open("index.cdb", std::ios_base::binary);
+    ifs_index.open("dat/index.cdb", std::ios_base::binary);
     if (ifs_index.fail()) {
       std::cerr << "ERROR: Failed to open a database file." << std::endl;
       return false;
@@ -43,7 +44,7 @@ public:
 
     // table
     {
-      std::ifstream ifs_table("eiwa.table", std::ios_base::binary);
+      std::ifstream ifs_table("dat/eiwa.table", std::ios_base::binary);
       if (!ifs_table.is_open()) {
         return false;
       }
@@ -58,7 +59,7 @@ public:
 
     // data
     dat_size = dat_pos_table.back();
-    fd = open("eiwa.dat", O_RDWR, 0666);
+    fd = open("dat/eiwa.dat", O_RDWR, 0666);
     if (fd < 0) {
       return false;
     }

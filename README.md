@@ -1,3 +1,14 @@
+Create database
+---------------
+
+```
+make
+./create EDP_DIRECTORY
+```
+
+3rd party
+---------
+
 https://github.com/chokkan/cdbpp
 modified BSD license
 

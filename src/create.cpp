@@ -17,14 +17,14 @@ const bool compress = !false;
 
 int main(int argc, char** argv)
 {
-  std::ofstream ofs("index.cdb", std::ios_base::binary);
+  std::ofstream ofs("dat/index.cdb", std::ios_base::binary);
   if (ofs.fail()) {
     std::cerr << "ERROR: Failed to open a database file." << std::endl;
     return 1;
   }
 
-  std::ofstream ofs_table("eiwa.table", std::ios_base::binary);
-  std::ofstream ofs_dat("eiwa.dat", std::ios_base::binary);
+  std::ofstream ofs_table("dat/eiwa.table", std::ios_base::binary);
+  std::ofstream ofs_dat("dat/eiwa.dat", std::ios_base::binary);
 
   wstring_convert<codecvt_utf8<wchar_t>,wchar_t> cv;
 

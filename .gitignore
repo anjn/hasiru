@@ -1,6 +1,5 @@
-*.o
+/bin
+/obj
+/dat
 .DS_Store
 *.dtps
-*.dat
-*.table
-*.cdb

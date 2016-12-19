@@ -7,7 +7,7 @@ int main(int argc, char** argv)
   hasiru.db_open();
 
   crow::SimpleApp app;
-  crow::mustache::set_base(".");
+  crow::mustache::set_base("server");
 
   CROW_ROUTE(app, "/")
   ([]{
@@ -34,9 +34,10 @@ int main(int argc, char** argv)
     return crow::response(ret);
   });
 
+  // I don't know how to serve static files...
   CROW_ROUTE(app, "/static/<str>")
   ([](std::string const& path) {
-    std::ifstream inf("static/" + path);
+    std::ifstream inf("server/static/" + path);
     if (!inf) return crow::response(404);
     return crow::response {std::string(std::istreambuf_iterator<char>(inf), std::istreambuf_iterator<char>())};
   });
